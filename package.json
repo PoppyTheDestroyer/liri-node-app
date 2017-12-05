@@ -1,0 +1,19 @@
+{
+  "name": "liri-node-app",
+  "version": "0.1.0",
+  "description": "Class Homework",
+  "main": "liri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmsaenz5/liri-node-app.git"
+  },
+  "author": "Jason Saenz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmsaenz5/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/jmsaenz5/liri-node-app#readme"
+}
