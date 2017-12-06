@@ -18,3 +18,10 @@ var movieKeys = {
 module.exports = twitterKeys;
 module.exports = spotifyKeys;
 module.exports = movieKeys;
+console.log(twitterKeys.consumer_key)
+
+var info = {
+  first: "Jason",
+  last: "Saenz",
+  dog: "Teddy"
+}
