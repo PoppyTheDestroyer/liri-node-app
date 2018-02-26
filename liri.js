@@ -11,12 +11,12 @@ for (i = 4; i < process.argv.length; i += 1) {
 }
 function userCommand() {
     switch (userRequest) {
-        case "my-tweets":
+        case "tweets":
             getTweets();
             break;
 
-        case "spotify-this-song":
-            getSpotify();
+        case "spotify":
+        getSpotify(secondRequest);
             break;
 
         case "movie-this":
@@ -27,7 +27,7 @@ function userCommand() {
             getTxt();
             break;
     }
-};
+}
 
 function getTweets() {
     var client = new twitter({
@@ -44,29 +44,35 @@ function getTweets() {
 
     client.get("statuses/user_timeline", params, function (error, tweets, response) {
         if (!error) {
-            console.log(tweets);
+            for(i=0; i<tweets.length; i+=1) {
+            var date = tweets[i].created_at;
+            console.log(`@jason_project5: ${tweets[i].text}\nCreated at: ${date.substring(0,19)}`);
+            console.log("------------------");
+            }
         }
     });
-};
+}
 
-function getSpotify() {
-    var spotify = new Spotify({
+function getSpotify(song) {
+    if(song===undefined) {
+        song = "Life During Wartime";
+    }
+    var client = new spotify({
         id: webKeys.spotifyKeys.consumer_key,
         secret: webKeys.spotifyKeys.consumer_secret
     });
 
-    var searchSong;
-    if (secondRequest === undefined) {
-        searchSong = "The Sign"
-    } else { searchSong = secondRequest }
-
-    spotify.search({ type: "track", query: searchSong }, function (err, data) {
-        if (err) {
-            return console.log("Error occurred: " + err);
-        }
-
-        console.log(data);
-    });
+   client.search({type: "track", query: song}, function(error, data) {
+       if(!error) {
+           for(var i=0; i<5; i +=1) {
+               var songData = data.tracks.items[i];
+               //console.log (songData.album[0]);
+               console.log(`\nArtist: ${songData.artists[0].name}\nSong: ${songData.name}\nPreview URL: ${songData.preview_url}\nAlbum: ${songData.album.name}\n`);
+           }
+       } else {
+           console.log(error);
+       }
+   });
 }
 
 userCommand();
