@@ -12,7 +12,7 @@ var webKeys = {
   },
 
   movieKeys: {
-    consumer_key: "40e9cece"
+    consumer_key: "cef2b868"
   }
 };
 
