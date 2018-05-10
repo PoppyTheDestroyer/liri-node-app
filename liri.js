@@ -11,23 +11,26 @@ for (i = 4; i < process.argv.length; i += 1) {
   secondRequest += "+" + process.argv[i];
 }
 function userCommand() {
-  switch (userRequest) {
-    case "tweets":
-      getTweets();
-      break;
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "What would you like to do?",
+            choices: ["View Jason's Tweets (they're not good)", "Look up info about a song on Spotify", "Look up info about a movie on IMDB (through OMDB)"],
+            name: "begin"
+        }
+    ])
 
-    case "spotify":
-      getSpotify(secondRequest);
-      break;
-
-    case "movie-this":
-      getMovie(secondRequest);
-      break;
-
-    case "do-what-it-says":
-      getTxt();
-      break;
-  }
+    .then(function (inquirerResponse) {
+        if (inquirerResponse.begin === "View Jason's Tweets (they're not good)") {
+            getTweets();
+        }
+        if (inquirerResponse.begin === "Look up info about a song on Spotify") {
+            getSpotify();
+        }
+        if (inquirerResponse.begin === "Look up info about a movie on IMDB (through OMDB") {
+           getMovie();
+        }
+    });
 }
 
 function getTweets() {
